@@ -3151,7 +3151,7 @@ Applications:
             stds = [posterior_stats[p]['std'] for p in params]
             
             bars = ax.bar(range(len(params)), means, yerr=stds, 
-                         capsize=5, alpha=0.7, color='blue', ecolor='black')
+                        capsize=5, alpha=0.7, color='blue', ecolor='black')
             ax.set_xticks(range(len(params)))
             ax.set_xticklabels([p.replace('_', '\n') for p in params], rotation=0)
             ax.set_ylabel('Parameter Value')
@@ -3182,8 +3182,8 @@ Applications:
                     widths = [u - l for l, u in zip(lower_bounds, upper_bounds)]
                     
                     bars = ax.bar(x, centers, yerr=[[(c - l) for c, l in zip(centers, lower_bounds)],
-                                                   [(u - c) for c, u in zip(centers, upper_bounds)]], 
-                                 capsize=5, alpha=0.7, color='green')
+                                                [(u - c) for c, u in zip(centers, upper_bounds)]], 
+                                capsize=5, alpha=0.7, color='green')
                     ax.set_xticks(x)
                     ax.set_xticklabels(levels)
                     ax.set_ylabel(f'{param_name} Value')
@@ -3203,7 +3203,7 @@ Applications:
                 relative_evidences = [e / max_evidence for e in evidences]
                 
                 bars = ax.bar(range(len(models)), relative_evidences, 
-                             color=['gold' if i == 0 else 'silver' for i in range(len(models))], alpha=0.7)
+                            color=['gold' if i == 0 else 'silver' for i in range(len(models))], alpha=0.7)
                 ax.set_xticks(range(len(models)))
                 ax.set_xticklabels([m.replace('_', '\n') for m in models], rotation=0)
                 ax.set_ylabel('Relative Evidence')
@@ -3212,7 +3212,7 @@ Applications:
                 
                 # Mark best model
                 ax.text(0, relative_evidences[0] + 0.05, 'BEST', 
-                       ha='center', va='bottom', fontweight='bold', color='red')
+                    ha='center', va='bottom', fontweight='bold', color='red')
         
         # Plot 4: Uncertainty decomposition
         ax = axes[1, 0]
@@ -3234,7 +3234,7 @@ Applications:
                 
                 ax.bar(x, epistemic_fractions, width, label='Epistemic (Model)', alpha=0.7, color='red')
                 ax.bar(x, aleatoric_fractions, width, bottom=epistemic_fractions, 
-                      label='Aleatoric (Data)', alpha=0.7, color='blue')
+                    label='Aleatoric (Data)', alpha=0.7, color='blue')
                 
                 ax.set_xticks(x)
                 ax.set_xticklabels([s.replace('_', '\n') for s in scenarios], rotation=0)
@@ -3243,7 +3243,7 @@ Applications:
                 ax.legend()
                 ax.grid(True, alpha=0.3)
         
-        # Plot 5: Acceptance rates and diagnostics
+        # Plot 5: Acceptance rates and diagnostics (FIXED VERSION)
         ax = axes[1, 1]
         if 'parameter_estimation' in bayesian_data:
             param_est = bayesian_data['parameter_estimation']
@@ -3261,14 +3261,14 @@ Applications:
                 ax.set_title('ABC Diagnostics\n(Sampling Quality)')
                 ax.grid(True, alpha=0.3)
                 
-                # Add value labels
-                for bar, value in zip(bars, values):
-                    if 'Rate' in bar.get_x():
+                # Add value labels - FIXED: Use enumerate instead of checking bar.get_x()
+                for i, (bar, value) in enumerate(zip(bars, values)):
+                    if i == 0:  # First bar is acceptance rate
                         label_text = f'{value*100:.1f}%'
-                    else:
+                    else:  # Second bar is effective sample size
                         label_text = f'{value*1000:.0f}'
                     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01,
-                           label_text, ha='center', va='bottom', fontweight='bold')
+                        label_text, ha='center', va='bottom', fontweight='bold')
         
         # Plot 6: Bayesian analysis summary
         ax = axes[1, 2]
@@ -3291,40 +3291,40 @@ Applications:
                 n_parameters = len(param_est['posterior_statistics'])
         
         summary_text = f"""
-BAYESIAN INFERENCE SUMMARY
+    BAYESIAN INFERENCE SUMMARY
 
-Parameter Estimation:
-• Method: Approximate Bayesian Computation
-• Parameters Estimated: {n_parameters}
-• Acceptance Rate: {acceptance_rate*100:.1f}%
-• Prior: Log-normal distributions
+    Parameter Estimation:
+    • Method: Approximate Bayesian Computation
+    • Parameters Estimated: {n_parameters}
+    • Acceptance Rate: {acceptance_rate*100:.1f}%
+    • Prior: Log-normal distributions
 
-Model Comparison:
-• Best Model: {best_model.replace('_', ' ').title()}
-• Evidence-based ranking
-• Bayes factor analysis
+    Model Comparison:
+    • Best Model: {best_model.replace('_', ' ').title()}
+    • Evidence-based ranking
+    • Bayes factor analysis
 
-Uncertainty Quantification:
-• Epistemic uncertainty (model)
-• Aleatoric uncertainty (data)  
-• Credible interval estimation
-• Posterior predictive checks
+    Uncertainty Quantification:
+    • Epistemic uncertainty (model)
+    • Aleatoric uncertainty (data)  
+    • Credible interval estimation
+    • Posterior predictive checks
 
-Clinical Applications:
-• Parameter uncertainty bounds
-• Model selection confidence
-• Treatment protocol ranking
-• Risk-based decision making
+    Clinical Applications:
+    • Parameter uncertainty bounds
+    • Model selection confidence
+    • Treatment protocol ranking
+    • Risk-based decision making
 
-Validation:
-• Cross-validation metrics
-• Posterior predictive accuracy
-• Model adequacy assessment
+    Validation:
+    • Cross-validation metrics
+    • Posterior predictive accuracy
+    • Model adequacy assessment
         """
         
         ax.text(0.05, 0.95, summary_text, transform=ax.transAxes,
-               fontsize=9, verticalalignment='top', fontfamily='monospace',
-               bbox=dict(boxstyle='round', facecolor='lavender', alpha=0.8))
+            fontsize=9, verticalalignment='top', fontfamily='monospace',
+            bbox=dict(boxstyle='round', facecolor='lavender', alpha=0.8))
         ax.set_xlim(0, 1)
         ax.set_ylim(0, 1)
         ax.axis('off')
