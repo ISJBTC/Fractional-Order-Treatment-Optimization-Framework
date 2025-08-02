@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Sensitivity Analysis Example
-============================
+Fixed Sensitivity Analysis Example
+==================================
 
 This script demonstrates parameter sensitivity analysis for the cancer model system.
 It systematically varies key parameters to understand their impact on treatment outcomes.
@@ -13,7 +13,7 @@ Features:
 - Robustness assessment
 
 Usage:
-    python examples/sensitivity_analysis.py
+    python examples/sensitivity_analysis_fixed.py
 
 Author: Cancer Model Team
 """
@@ -255,7 +255,7 @@ def create_sensitivity_plots(all_results, output_dir):
     plt.close()
     print(f"  Main sensitivity plot: {main_plot_file}")
     
-    # Create detailed correlation analysis
+    # Create correlation analysis
     create_correlation_analysis(all_results, output_dir)
     
     # Create parameter ranking plot
@@ -292,30 +292,42 @@ def create_correlation_analysis(all_results, output_dir):
     fig, axes = plt.subplots(1, 2, figsize=(16, 6))
     
     # Plot 1: Parameter effects on efficacy
-    efficacy_by_param = combined_df.pivot_table(
-        values='efficacy_score', 
-        index='parameter', 
-        columns='parameter_value', 
-        aggfunc='mean'
-    )
-    
-    sns.heatmap(efficacy_by_param, annot=True, fmt='.1f', cmap='viridis', ax=axes[0])
-    axes[0].set_title('Efficacy Score by Parameter Value')
-    axes[0].set_xlabel('Parameter Value')
-    axes[0].set_ylabel('Parameter')
+    try:
+        efficacy_by_param = combined_df.pivot_table(
+            values='efficacy_score', 
+            index='parameter', 
+            columns='parameter_value', 
+            aggfunc='mean'
+        )
+        
+        if not efficacy_by_param.empty:
+            sns.heatmap(efficacy_by_param, annot=True, fmt='.1f', cmap='viridis', ax=axes[0])
+            axes[0].set_title('Efficacy Score by Parameter Value')
+            axes[0].set_xlabel('Parameter Value')
+            axes[0].set_ylabel('Parameter')
+    except Exception as e:
+        print(f"    Error creating efficacy heatmap: {e}")
+        axes[0].text(0.5, 0.5, 'Could not create\nefficacy heatmap', 
+                    ha='center', va='center', transform=axes[0].transAxes)
     
     # Plot 2: Parameter effects on resistance
-    resistance_by_param = combined_df.pivot_table(
-        values='final_resistance', 
-        index='parameter', 
-        columns='parameter_value', 
-        aggfunc='mean'
-    )
-    
-    sns.heatmap(resistance_by_param, annot=True, fmt='.1f', cmap='YlOrRd', ax=axes[1])
-    axes[1].set_title('Final Resistance by Parameter Value')
-    axes[1].set_xlabel('Parameter Value')
-    axes[1].set_ylabel('Parameter')
+    try:
+        resistance_by_param = combined_df.pivot_table(
+            values='final_resistance', 
+            index='parameter', 
+            columns='parameter_value', 
+            aggfunc='mean'
+        )
+        
+        if not resistance_by_param.empty:
+            sns.heatmap(resistance_by_param, annot=True, fmt='.1f', cmap='YlOrRd', ax=axes[1])
+            axes[1].set_title('Final Resistance by Parameter Value')
+            axes[1].set_xlabel('Parameter Value')
+            axes[1].set_ylabel('Parameter')
+    except Exception as e:
+        print(f"    Error creating resistance heatmap: {e}")
+        axes[1].text(0.5, 0.5, 'Could not create\nresistance heatmap', 
+                    ha='center', va='center', transform=axes[1].transAxes)
     
     plt.tight_layout()
     
