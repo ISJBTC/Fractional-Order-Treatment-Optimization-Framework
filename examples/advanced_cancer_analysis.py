@@ -12,7 +12,7 @@ This combines:
 - Clinical decision support
 
 Usage:
-    python examples/run_complete_advanced_analysis.py
+    python examples/run_advanced_cancer_analysis.py
 
 Author: Cancer Model Team
 """
@@ -2249,7 +2249,10 @@ class CompleteAdvancedAnalyzer:
         ax5.set_xlabel('Time (days)', fontweight='bold')
         ax5.set_ylabel('Resistance (%)', fontweight='bold')
         ax5.set_title('Resistance Development Dynamics\n(Validated Parameters)', fontweight='bold')
-        ax5.legend(fontweight='bold')
+        
+        legend = ax5.legend()
+        for text in legend.get_texts():
+            text.set_fontweight('bold')
         ax5.grid(True, alpha=0.3)
         
         # Plot 6: Advanced analysis summary

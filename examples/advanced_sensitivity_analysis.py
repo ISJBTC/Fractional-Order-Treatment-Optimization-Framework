@@ -13,7 +13,7 @@ Features:
 - Provides clinical decision support insights
 
 Usage:
-    python examples/realistic_sensitivity_analysis.py
+    python examples/advanced_sensitivity_analysis.py
 
 Author: Cancer Model Team
 """
