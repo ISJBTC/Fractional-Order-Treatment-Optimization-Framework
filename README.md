@@ -52,3 +52,9 @@ If you encounter any issues during setup, check:
 - All dependencies installed correctly
 
 Created by Cancer Model Setup Script v1.0
+
+## 📖 Citation
+
+If you use this code in academic work, please cite this repository.
+A DOI will be provided after official release.
+
