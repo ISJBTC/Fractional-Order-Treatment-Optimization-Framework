@@ -15,4 +15,6 @@ keywords:
   - treatment optimization
   - mathematical oncology
 license: MIT
-version: "1.0.0"
+version: "1.0.1"
+doi: 10.5281/zenodo.18224281
+
