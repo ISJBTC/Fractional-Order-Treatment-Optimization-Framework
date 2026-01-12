@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Fractional-Order Cancer Treatment Optimization Model"
+authors:
+  - family-names: "Irshad Jamadar"
+    given-names: "Irshad Jamadar"
+    affiliation: "MIT-ADT University"
+date-released: 2026-01-12
+url: "https://github.com/ISJBTC/Fractional-Order-Treatment-Optimization-Framework"
+repository-code: "https://github.com/ISJBTC/Fractional-Order-Treatment-Optimization-Framework.git"
+keywords:
+  - cancer modeling
+  - fractional calculus
+  - treatment optimization
+  - mathematical oncology
+license: MIT
+version: "1.0.0"
