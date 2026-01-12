@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/1030668290.svg)](https://doi.org/10.5281/zenodo.18224280)
 # Cancer Model: Modular Treatment Modeling System
 
 A comprehensive, modular system for modeling cancer treatment dynamics using fractional calculus and advanced mathematical techniques.
