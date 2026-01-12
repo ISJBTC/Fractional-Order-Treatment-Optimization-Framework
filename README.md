@@ -56,6 +56,13 @@ Created by Cancer Model Setup Script v1.0
 
 ## 📖 Citation
 
-If you use this code in academic work, please cite this repository.
-A DOI will be provided after official release.
+@software{jamadar2026fractional,
+  title   = {Fractional-Order Cancer Treatment Optimization Model},
+  author  = {Jamadar, Irshad},
+  year    = {2026},
+  version = {v1.0.1},
+  doi     = {10.5281/zenodo.18224281},
+  url     = {[https://github.com/YOUR-USERNAME/YOUR-REPO](https://github.com/ISJBTC/Fractional-Order-Treatment-Optimization-Framework)}
+}
+
 
