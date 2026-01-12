@@ -15,7 +15,7 @@ Features:
 Usage:
     python examples/advanced_sensitivity_analysis.py
 
-Author: Cancer Model Team
+
 """
 
 import sys
